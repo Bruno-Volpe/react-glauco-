@@ -172,6 +172,18 @@ nav a:hover {
   border-bottom: 2px solid #fff;
 }
 
+nav div {
+  cursor: pointer;
+  float: right;
+  color: #ccc;
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 16px;
+  display: block;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom .2s ease;
+}
+
 .users input[type="text"] {
   width: 200px;
   height: 40px;
@@ -270,4 +282,87 @@ nav a:hover {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+}
+
+.restore {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: baseline;
+}
+
+.restore {
+  color: black;
+  font-size: 24px;
+}
+
+.restore li:hover {
+  border-radius: 0px;
+  background-color: white;
+}
+
+.FaComment {
+  color: #008CBA;
+  margin-right: 5px;
+}
+
+.answer {
+  font-size: 16px;
+  margin-left: 0px;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px auto 0 auto;
+  width: 40%;
+  background-color: #fff;
+  border-radius: 12px;
+  height: 400px;
+  padding-bottom: 40px;
+}
+
+.login h1 {
+  font-size: 42px;
+  color: #008CBA;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login input {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  background-color: white;
+  background-image: url('./components/mail.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
+}
+
+.login button {
+  background-color: #fff;
+  border: none;
+  color: #008CBA;
+  cursor: pointer;
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 12;
+  margin-top: 6px;
+  width: 40%;
+  transition-duration: 0.6s;
+  border-style: solid;
+  border-color: #008CBA;
+}
+
+.login button:hover {
+  background-color: #008CBA;
+  color: #fff;
 }
