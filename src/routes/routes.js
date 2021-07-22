@@ -6,14 +6,16 @@ import HomeUser from '../pages/homeUser'
 
 import error404 from '../pages/404'
 
-import adminHome from '../pages/adminHome'
-import adminUpdateUser from '../pages/adminUpdateUser'
-import adminCreateUser from '../pages/adminCreateUser'
-import adminDetailUser from '../pages/adminDetailUser'
+import adminHome from '../pages/admin/user/adminHome'
+import adminUpdateUser from '../pages/admin/user/adminUpdateUser'
+import adminCreateUser from '../pages/admin/user/adminCreateUser'
+import adminDetailUser from '../pages/admin/user/adminDetailUser'
 
-import adminQUestionsHome from '../pages/adminQUestionsHome'
-import adminQUestionUpdate from '../pages/adminQUestionUpdate'
-import adminQuestionCreate from '../pages/adminQuestionCreate'
+import adminQUestionsHome from '../pages/admin/question/adminQUestionsHome'
+import adminQUestionUpdate from '../pages/admin/question/adminQUestionUpdate'
+import adminQuestionCreate from '../pages/admin/question/adminQuestionCreate'
+
+import loginHome from '../pages/login/home'
 
 const Routes = () => {
     return(
@@ -32,6 +34,8 @@ const Routes = () => {
                 <Route exact path='/admin/questions' component={adminQUestionsHome} />
                 <Route exact path='/admin/createQestion' component={adminQuestionCreate} />
                 <Route exact path='/admin/updateQuestion/:id' component={adminQUestionUpdate} />
+
+                <Route exact path='/login' component={loginHome} />
 
                 <Route path="*" component={error404} />
             </Switch>

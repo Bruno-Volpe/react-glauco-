@@ -27,7 +27,7 @@ function App() {
     }
 
   return (
-    <form className="question-form" method="get" action={`/user/${selected}`}>
+    <form className="question-form" method="get" action={`/user/${selected}`} >
       {question.map(item => {
         return (
           <h1 key={item.enunciado} className="question-enunciado">{item.enunciado}</h1>

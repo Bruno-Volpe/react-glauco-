@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import api from '../../services/api'
+import React from 'react'
 import { Link } from "react-router-dom";
 
 //http://34.95.147.194/
