@@ -45,6 +45,7 @@ function App() {
                 }, config)
                 toast.success(request.data.result)
                 localStorage.setItem("token", request.data.token)
+                if (email === 'bruno.gvolpe@icloud.com') return history.push('/admin')
                 history.push('/')
             } catch (e) {
                 toast.warning('Codigo Inválido')
