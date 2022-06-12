@@ -43,7 +43,13 @@ function App() {
 
   async function deleteQuestion(id, index) {
     try {
-      await api.delete(`/questions/${id}`).data
+      const token = localStorage.getItem("token")
+      const config = {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }
+      await api.delete(`/questions/${id}`, config).data
       const newQuestion = [...question]
       newQuestion.splice(index, 1)
 
