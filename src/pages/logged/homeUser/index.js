@@ -12,15 +12,32 @@ function App() {
   const history = useHistory()
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      history.push('/login')
+      toast.warning('Você precisa fazer login!')
+      return
+    }
+
     async function loadMainQuestion() {
-      const response = (await api.get(`/questions/${answear}`)).data
+      try {
+        const config = {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        }
+        const response = (await api.get(`/questions/${answear}`, config)).data
 
-      if (response.length === 0) {
-        history.replace('/')
-        return
+        if (response.length === 0) {
+          history.replace('/')
+          return
+        }
+
+        setQuestion(response)
+      } catch (e) {
+        history.push('/login')
+        toast.warning('Você precisa fazer login!')
       }
-
-      setQuestion(response)
     }
 
     loadMainQuestion()
@@ -35,9 +52,6 @@ function App() {
         selecteds.push(box.value)
       }
     })
-
-    console.log(selecteds)
-
     if (question.length !== selecteds.length) {
       toast.warning('Formulario Invalido!')
       return
@@ -48,7 +62,6 @@ function App() {
 
   function createAnswer(selecteds) {
     try {
-      console.log(selecteds)
       if (selecteds.length > 0) {
         let contador = 0
 

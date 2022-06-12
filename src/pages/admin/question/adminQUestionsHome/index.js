@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../../services/api'
-import {  FaEdit, FaWindowClose, FaQuestion, FaCheck, FaSkull } from 'react-icons/fa'
+import { FaEdit, FaWindowClose, FaQuestion, FaCheck, FaSkull } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Nav from '../../../../components/nav'
 
-
+import { useHistory } from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
@@ -14,15 +14,32 @@ import 'react-confirm-alert/src/react-confirm-alert.css'
 
 function App() {
   const [question, setquestion] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      history.push('/login')
+      toast.warning('Você precisa fazer login!')
+      return
+    }
     async function loadMainQuestion() {
-        const response = (await api.get(`/questions/`)).data
+      try {
+        const config = {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        }
+        const response = (await api.get(`/questions/`, config)).data
         setquestion(response)
+      } catch (e) {
+        history.push('/login')
+        toast.warning('Você precisa ser admin!')
       }
+    }
 
-      loadMainQuestion()
-  }, [])
+    loadMainQuestion()
+  }, [history])
 
   async function deleteQuestion(id, index) {
     try {
@@ -35,14 +52,14 @@ function App() {
     } catch (e) {
       return toast.error('Falha ao excluir o Question')
     }
-    
+
   }
 
-  function submit (id, index) {
+  function submit(id, index) {
     confirmAlert({
       childrenElement: () => <div />,
       customUI: ({ title, message, onClose }) => {
-        return(
+        return (
           <div className='custom-ui'>
             <h3>{`Tem certeza que deseja apagar esta pergunta?`}</h3>
             <button className='confirm' onClick={() => {
@@ -53,29 +70,29 @@ function App() {
           </div>
         )
       },
-      willUnmount: () => {}
+      willUnmount: () => { }
     })
   };
 
   return (
     <div>
       <Nav />
-        <ul className="users" >
-          <Link to="/admin/createQestion" ><FaQuestion className="add-button" /></Link>
-          {
-            question.map((question, index) => {
-              return (
-                  <li>
-                    {question.enunciado}
-                    <div>
-                      <Link to={`/admin/updateQuestion/${question.id}`} ><FaEdit className="edit" /></Link>
-                      <FaWindowClose onClick={e => submit(question.id, index)} className="delete" />
-                    </div>
-                  </li>
-              )
-            })
-          }
-        </ul>
+      <ul className="users" >
+        <Link to="/admin/createQestion" ><FaQuestion className="add-button" /></Link>
+        {
+          question.map((question, index) => {
+            return (
+              <li>
+                {question.enunciado}
+                <div>
+                  <Link to={`/admin/updateQuestion/${question.id}`} ><FaEdit className="edit" /></Link>
+                  <FaWindowClose onClick={e => submit(question.id, index)} className="delete" />
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   )
 }
