@@ -16,8 +16,19 @@ function App() {
     const [token, setToken] = useState('')
 
     useEffect(() => {
-        //TODO Verificar se o usaurio esta logado
-    }, [])
+        async function isLoggedIn() {
+            const token = localStorage.getItem("token")
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+
+            }
+            await api.get('/checkJWT', config)
+            history.push('/') //Usuario ja esta logado
+        }
+        isLoggedIn()
+    }, [token, history])
 
     async function handleSubmit(e) {
         e.preventDefault()
