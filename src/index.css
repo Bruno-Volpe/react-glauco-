@@ -366,3 +366,7 @@ nav div {
   background-color: #008CBA;
   color: #fff;
 }
+
+#block {
+  cursor: not-allowed;
+}

@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import HomeUserMain from '../pages/homeUserMain'
 import Header from '../components/header'
-import HomeUser from '../pages/homeUser'
+import HomeUserMain from '../pages/logged/homeUserMain'
+import HomeUser from '../pages/logged/homeUser'
 
 import error404 from '../pages/404'
 
@@ -18,7 +18,7 @@ import adminQuestionCreate from '../pages/admin/question/adminQuestionCreate'
 import loginHome from '../pages/login/home'
 
 const Routes = () => {
-    return(
+    return (
         <BrowserRouter>
             <Header />
             <Switch>
@@ -26,11 +26,11 @@ const Routes = () => {
                 <Route exact path='/user/:answear' component={HomeUser} />
 
                 <Route exact path='/admin' component={adminHome} />
-                
+
                 <Route exact path='/admin/update/:id' component={adminUpdateUser} />
                 <Route exact path='/admin/create' component={adminCreateUser} />
                 <Route exact path='/admin/detailUser/:id' component={adminDetailUser} />
-                
+
                 <Route exact path='/admin/questions' component={adminQUestionsHome} />
                 <Route exact path='/admin/createQestion' component={adminQuestionCreate} />
                 <Route exact path='/admin/updateQuestion/:id' component={adminQUestionUpdate} />
